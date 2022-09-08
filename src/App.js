@@ -4,8 +4,9 @@ import TodoList from "./components/TodoList";
 import { useState, useEffect } from "react";
 
 function App() {
+  let data = localStorage.getItem("todos");
   const [inputText, setInputText] = useState("");
-  const [todos, setTodos] = useState([]); // set array in default otherwise it will crash in initializing
+  const [todos, setTodos] = useState(JSON.parse(data)); // set array in default otherwise it will crash in initializing
   const [status, setStatus] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
 
@@ -42,7 +43,7 @@ function App() {
   const getLocalTodos = () => {
     if (localStorage.getItem("todos") === null) {
       // console.log("Clear");
-      localStorage.setItem("todos", JSON.stringify([]));
+      localStorage.setItem("todos", JSON.stringify(todos));
     } else {
       // console.log("text", localStorage.getItem("todos"));
       let todoLocal = JSON.parse(localStorage.getItem("todos"));
